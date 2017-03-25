@@ -1,0 +1,255 @@
+
+obj/c/kernel.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <mailbox_init>:
+   0:	e92d4010 	push	{r4, lr}
+   4:	e3a01d1e 	mov	r1, #1920	; 0x780
+   8:	e3a00000 	mov	r0, #0
+   c:	e3440004 	movt	r0, #16388	; 0x4004
+  10:	ebfffffe 	bl	0 <PUT32>
+  14:	e3001438 	movw	r1, #1080	; 0x438
+  18:	e3a00004 	mov	r0, #4
+  1c:	e3440004 	movt	r0, #16388	; 0x4004
+  20:	ebfffffe 	bl	0 <PUT32>
+  24:	e3a01d1e 	mov	r1, #1920	; 0x780
+  28:	e3a00008 	mov	r0, #8
+  2c:	e3440004 	movt	r0, #16388	; 0x4004
+  30:	ebfffffe 	bl	0 <PUT32>
+  34:	e3001438 	movw	r1, #1080	; 0x438
+  38:	e3a0000c 	mov	r0, #12
+  3c:	e3440004 	movt	r0, #16388	; 0x4004
+  40:	ebfffffe 	bl	0 <PUT32>
+  44:	e3a01000 	mov	r1, #0
+  48:	e3a00010 	mov	r0, #16
+  4c:	e3440004 	movt	r0, #16388	; 0x4004
+  50:	ebfffffe 	bl	0 <PUT32>
+  54:	e3a01020 	mov	r1, #32
+  58:	e3a00014 	mov	r0, #20
+  5c:	e3440004 	movt	r0, #16388	; 0x4004
+  60:	ebfffffe 	bl	0 <PUT32>
+  64:	e3a01000 	mov	r1, #0
+  68:	e3a00018 	mov	r0, #24
+  6c:	e3440004 	movt	r0, #16388	; 0x4004
+  70:	ebfffffe 	bl	0 <PUT32>
+  74:	e3a01000 	mov	r1, #0
+  78:	e3a0001c 	mov	r0, #28
+  7c:	e3440004 	movt	r0, #16388	; 0x4004
+  80:	ebfffffe 	bl	0 <PUT32>
+  84:	e3a01000 	mov	r1, #0
+  88:	e3a00020 	mov	r0, #32
+  8c:	e3440004 	movt	r0, #16388	; 0x4004
+  90:	ebfffffe 	bl	0 <PUT32>
+  94:	e3a00024 	mov	r0, #36	; 0x24
+  98:	e3440004 	movt	r0, #16388	; 0x4004
+  9c:	e3a01000 	mov	r1, #0
+  a0:	e8bd4010 	pop	{r4, lr}
+  a4:	eafffffe 	b	0 <PUT32>
+
+000000a8 <mailbox_write>:
+  a8:	e92d4070 	push	{r4, r5, r6, lr}
+  ac:	e30b4898 	movw	r4, #47256	; 0xb898
+  b0:	e3434f00 	movt	r4, #16128	; 0x3f00
+  b4:	e1a06000 	mov	r6, r0
+  b8:	e1a05001 	mov	r5, r1
+  bc:	e1a00004 	mov	r0, r4
+  c0:	ebfffffe 	bl	0 <GET32>
+  c4:	e3500000 	cmp	r0, #0
+  c8:	bafffffb 	blt	bc <mailbox_write+0x14>
+  cc:	e0861005 	add	r1, r6, r5
+  d0:	e30b08a0 	movw	r0, #47264	; 0xb8a0
+  d4:	e3430f00 	movt	r0, #16128	; 0x3f00
+  d8:	ebfffffe 	bl	0 <PUT32>
+  dc:	e3a00000 	mov	r0, #0
+  e0:	e8bd8070 	pop	{r4, r5, r6, pc}
+
+000000e4 <mailbox_read>:
+  e4:	e92d4070 	push	{r4, r5, r6, lr}
+  e8:	e30b4898 	movw	r4, #47256	; 0xb898
+  ec:	e3434f00 	movt	r4, #16128	; 0x3f00
+  f0:	e30b5880 	movw	r5, #47232	; 0xb880
+  f4:	e3435f00 	movt	r5, #16128	; 0x3f00
+  f8:	e1a06000 	mov	r6, r0
+  fc:	e1a00004 	mov	r0, r4
+ 100:	ebfffffe 	bl	0 <GET32>
+ 104:	e3100101 	tst	r0, #1073741824	; 0x40000000
+ 108:	1afffffb 	bne	fc <mailbox_read+0x18>
+ 10c:	e1a00005 	mov	r0, r5
+ 110:	ebfffffe 	bl	0 <GET32>
+ 114:	e200300f 	and	r3, r0, #15
+ 118:	e1530006 	cmp	r3, r6
+ 11c:	1afffff6 	bne	fc <mailbox_read+0x18>
+ 120:	e1a00220 	lsr	r0, r0, #4
+ 124:	e8bd8070 	pop	{r4, r5, r6, pc}
+
+00000128 <color_screen>:
+ 128:	e59f30b8 	ldr	r3, [pc, #184]	; 1e8 <color_screen+0xc0>
+ 12c:	e59f20b8 	ldr	r2, [pc, #184]	; 1ec <color_screen+0xc4>
+ 130:	e08f3003 	add	r3, pc, r3
+ 134:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
+ 138:	e3a07000 	mov	r7, #0
+ 13c:	e3006437 	movw	r6, #1079	; 0x437
+ 140:	e7935002 	ldr	r5, [r3, r2]
+ 144:	e5857000 	str	r7, [r5]
+ 148:	e5952000 	ldr	r2, [r5]
+ 14c:	e1520006 	cmp	r2, r6
+ 150:	8a00001e 	bhi	1d0 <color_screen+0xa8>
+ 154:	e59f1094 	ldr	r1, [pc, #148]	; 1f0 <color_screen+0xc8>
+ 158:	e1a04000 	mov	r4, r0
+ 15c:	e59f2090 	ldr	r2, [pc, #144]	; 1f4 <color_screen+0xcc>
+ 160:	e7939001 	ldr	r9, [r3, r1]
+ 164:	e7938002 	ldr	r8, [r3, r2]
+ 168:	e5887000 	str	r7, [r8]
+ 16c:	e5983000 	ldr	r3, [r8]
+ 170:	e3530d1e 	cmp	r3, #1920	; 0x780
+ 174:	2a00000b 	bcs	1a8 <color_screen+0x80>
+ 178:	e5990000 	ldr	r0, [r9]
+ 17c:	e1a01004 	mov	r1, r4
+ 180:	ebfffffe 	bl	0 <PUT32>
+ 184:	e5993000 	ldr	r3, [r9]
+ 188:	e2833004 	add	r3, r3, #4
+ 18c:	e5893000 	str	r3, [r9]
+ 190:	e5983000 	ldr	r3, [r8]
+ 194:	e2833001 	add	r3, r3, #1
+ 198:	e5883000 	str	r3, [r8]
+ 19c:	e5983000 	ldr	r3, [r8]
+ 1a0:	e3530d1e 	cmp	r3, #1920	; 0x780
+ 1a4:	3afffff3 	bcc	178 <color_screen+0x50>
+ 1a8:	e5953000 	ldr	r3, [r5]
+ 1ac:	e2833001 	add	r3, r3, #1
+ 1b0:	e5853000 	str	r3, [r5]
+ 1b4:	e5953000 	ldr	r3, [r5]
+ 1b8:	e1530006 	cmp	r3, r6
+ 1bc:	9affffe9 	bls	168 <color_screen+0x40>
+ 1c0:	e5990000 	ldr	r0, [r9]
+ 1c4:	e3e01000 	mvn	r1, #0
+ 1c8:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
+ 1cc:	eafffffe 	b	0 <PUT32>
+ 1d0:	e59f2018 	ldr	r2, [pc, #24]	; 1f0 <color_screen+0xc8>
+ 1d4:	e3e01000 	mvn	r1, #0
+ 1d8:	e7939002 	ldr	r9, [r3, r2]
+ 1dc:	e5990000 	ldr	r0, [r9]
+ 1e0:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
+ 1e4:	eafffffe 	b	0 <PUT32>
+ 1e8:	000000b0 	strheq	r0, [r0], -r0	; <UNPREDICTABLE>
+	...
+
+000001f8 <kernel_main>:
+ 1f8:	e92d4070 	push	{r4, r5, r6, lr}
+ 1fc:	e3a01401 	mov	r1, #16777216	; 0x1000000
+ 200:	e3a00004 	mov	r0, #4
+ 204:	e3430f20 	movt	r0, #16160	; 0x3f20
+ 208:	ebfffffe 	bl	0 <PUT32>
+ 20c:	e59f40cc 	ldr	r4, [pc, #204]	; 2e0 <kernel_main+0xe8>
+ 210:	ebfffffe 	bl	0 <mailbox_init>
+ 214:	e3a01001 	mov	r1, #1
+ 218:	e3a00000 	mov	r0, #0
+ 21c:	e3440004 	movt	r0, #16388	; 0x4004
+ 220:	ebfffffe 	bl	a8 <mailbox_write>
+ 224:	e3a00001 	mov	r0, #1
+ 228:	ebfffffe 	bl	e4 <mailbox_read>
+ 22c:	e3a00000 	mov	r0, #0
+ 230:	e34f0fff 	movt	r0, #65535	; 0xffff
+ 234:	ebfffffe 	bl	128 <color_screen>
+ 238:	e3a0001c 	mov	r0, #28
+ 23c:	e3430f20 	movt	r0, #16160	; 0x3f20
+ 240:	e3a01701 	mov	r1, #262144	; 0x40000
+ 244:	e08f4004 	add	r4, pc, r4
+ 248:	ebfffffe 	bl	0 <PUT32>
+ 24c:	e59f3090 	ldr	r3, [pc, #144]	; 2e4 <kernel_main+0xec>
+ 250:	e3a06028 	mov	r6, #40	; 0x28
+ 254:	e3436f20 	movt	r6, #16160	; 0x3f20
+ 258:	e3a0501c 	mov	r5, #28
+ 25c:	e3435f20 	movt	r5, #16160	; 0x3f20
+ 260:	e7944003 	ldr	r4, [r4, r3]
+ 264:	e3a01701 	mov	r1, #262144	; 0x40000
+ 268:	e1a00006 	mov	r0, r6
+ 26c:	ebfffffe 	bl	0 <PUT32>
+ 270:	e3a03000 	mov	r3, #0
+ 274:	e5843000 	str	r3, [r4]
+ 278:	e5943000 	ldr	r3, [r4]
+ 27c:	e3530801 	cmp	r3, #65536	; 0x10000
+ 280:	2a000006 	bcs	2a0 <kernel_main+0xa8>
+ 284:	ebfffffe 	bl	0 <dummy>
+ 288:	e5943000 	ldr	r3, [r4]
+ 28c:	e2833001 	add	r3, r3, #1
+ 290:	e5843000 	str	r3, [r4]
+ 294:	e5943000 	ldr	r3, [r4]
+ 298:	e3530801 	cmp	r3, #65536	; 0x10000
+ 29c:	3afffff8 	bcc	284 <kernel_main+0x8c>
+ 2a0:	e3a01701 	mov	r1, #262144	; 0x40000
+ 2a4:	e1a00005 	mov	r0, r5
+ 2a8:	ebfffffe 	bl	0 <PUT32>
+ 2ac:	e3a03000 	mov	r3, #0
+ 2b0:	e5843000 	str	r3, [r4]
+ 2b4:	e5943000 	ldr	r3, [r4]
+ 2b8:	e3530801 	cmp	r3, #65536	; 0x10000
+ 2bc:	2affffe8 	bcs	264 <kernel_main+0x6c>
+ 2c0:	ebfffffe 	bl	0 <dummy>
+ 2c4:	e5943000 	ldr	r3, [r4]
+ 2c8:	e2833001 	add	r3, r3, #1
+ 2cc:	e5843000 	str	r3, [r4]
+ 2d0:	e5943000 	ldr	r3, [r4]
+ 2d4:	e3530801 	cmp	r3, #65536	; 0x10000
+ 2d8:	3afffff8 	bcc	2c0 <kernel_main+0xc8>
+ 2dc:	eaffffe0 	b	264 <kernel_main+0x6c>
+ 2e0:	00000094 	muleq	r0, r4, r0
+ 2e4:	00000000 	andeq	r0, r0, r0
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	43434700 	movtmi	r4, #14080	; 0x3700
+   4:	4728203a 			; <UNDEFINED> instruction: 0x4728203a
+   8:	5420554e 	strtpl	r5, [r0], #-1358	; 0xfffffab2
+   c:	736c6f6f 	cmnvc	ip, #444	; 0x1bc
+  10:	726f6620 	rsbvc	r6, pc, #32, 12	; 0x2000000
+  14:	4d524120 	ldfmie	f4, [r2, #-128]	; 0xffffff80
+  18:	626d4520 	rsbvs	r4, sp, #32, 10	; 0x8000000
+  1c:	65646465 	strbvs	r6, [r4, #-1125]!	; 0xfffffb9b
+  20:	72502064 	subsvc	r2, r0, #100	; 0x64
+  24:	7365636f 	cmnvc	r5, #-1140850687	; 0xbc000001
+  28:	73726f73 	cmnvc	r2, #460	; 0x1cc
+  2c:	322d3620 	eorcc	r3, sp, #32, 12	; 0x2000000
+  30:	2d373130 	ldfcss	f3, [r7, #-192]!	; 0xffffff40
+  34:	752d3171 	strvc	r3, [sp, #-369]!	; 0xfffffe8f
+  38:	74616470 	strbtvc	r6, [r1], #-1136	; 0xfffffb90
+  3c:	36202965 	strtcc	r2, [r0], -r5, ror #18
+  40:	312e332e 			; <UNDEFINED> instruction: 0x312e332e
+  44:	31303220 	teqcc	r0, r0, lsr #4
+  48:	31323037 	teqcc	r2, r7, lsr r0
+  4c:	72282035 	eorvc	r2, r8, #53	; 0x35
+  50:	61656c65 	cmnvs	r5, r5, ror #24
+  54:	20296573 	eorcs	r6, r9, r3, ror r5
+  58:	4d52415b 	ldfmie	f4, [r2, #-364]	; 0xfffffe94
+  5c:	626d652f 	rsbvs	r6, sp, #197132288	; 0xbc00000
+  60:	65646465 	strbvs	r6, [r4, #-1125]!	; 0xfffffb9b
+  64:	2d362d64 	ldccs	13, cr2, [r6, #-400]!	; 0xfffffe70
+  68:	6e617262 	cdpvs	2, 6, cr7, cr1, cr2, {3}
+  6c:	72206863 	eorvc	r6, r0, #6488064	; 0x630000
+  70:	73697665 	cmnvc	r9, #105906176	; 0x6500000
+  74:	206e6f69 	rsbcs	r6, lr, r9, ror #30
+  78:	35353432 	ldrcc	r3, [r5, #-1074]!	; 0xfffffbce
+  7c:	005d3231 	subseq	r3, sp, r1, lsr r2
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00003941 	andeq	r3, r0, r1, asr #18
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	0000002f 	andeq	r0, r0, pc, lsr #32
+  10:	726f4305 	rsbvc	r4, pc, #335544320	; 0x14000000
+  14:	2d786574 	cfldr64cs	mvdx6, [r8, #-464]!	; 0xfffffe30
+  18:	00333541 	eorseq	r3, r3, r1, asr #10
+  1c:	41070e06 	tstmi	r7, r6, lsl #28
+  20:	02090108 	andeq	r0, r9, #8, 2
+  24:	01140412 	tsteq	r4, r2, lsl r4
+  28:	03170115 	tsteq	r7, #1073741829	; 0x40000005
+  2c:	01190118 	tsteq	r9, r8, lsl r1
+  30:	021e011a 	andseq	r0, lr, #-2147483642	; 0x80000006
+  34:	012a0122 			; <UNDEFINED> instruction: 0x012a0122
+  38:	Address 0x0000000000000038 is out of bounds.
+

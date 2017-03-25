@@ -1,0 +1,49 @@
+
+obj/asm/boot.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.boot:
+
+00000000 <_start>:
+   0:	e3a0d902 	mov	sp, #32768	; 0x8000
+   4:	ebfffffe 	bl	0 <kernel_main>
+
+00000008 <hang>:
+   8:	eafffffe 	b	8 <hang>
+
+0000000c <PUT32>:
+   c:	e5801000 	str	r1, [r0]
+  10:	e12fff1e 	bx	lr
+
+00000014 <GET32>:
+  14:	e5900000 	ldr	r0, [r0]
+  18:	e12fff1e 	bx	lr
+
+0000001c <PUT16>:
+  1c:	e1c010b0 	strh	r1, [r0]
+  20:	e12fff1e 	bx	lr
+
+00000024 <PUT8>:
+  24:	e5c01000 	strb	r1, [r0]
+  28:	e12fff1e 	bx	lr
+
+0000002c <GETPC>:
+  2c:	e1a0000e 	mov	r0, lr
+  30:	e12fff1e 	bx	lr
+
+00000034 <dummy>:
+  34:	e12fff1e 	bx	lr
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00002741 	andeq	r2, r0, r1, asr #14
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	0000001d 	andeq	r0, r0, sp, lsl r0
+  10:	726f4305 	rsbvc	r4, pc, #335544320	; 0x14000000
+  14:	2d786574 	cfldr64cs	mvdx6, [r8, #-464]!	; 0xfffffe30
+  18:	00333541 	eorseq	r3, r3, r1, asr #10
+  1c:	41070e06 	tstmi	r7, r6, lsl #28
+  20:	02090108 	andeq	r0, r9, #8, 2
+  24:	0344012a 	movteq	r0, #16682	; 0x412a
