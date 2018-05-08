@@ -32,8 +32,6 @@ ASMLISTS = $(patsubst $(ASMSRCDIR)/%.s, $(ASMLISTDIR)/%.lst, $(wildcard $(ASMSRC
 OUTPUT_ELF = kernel.elf
 OUTPUT_IMG = kernel.img
 
-
-
 $(COBJDIR)/%.o : $(CSRCDIR)/%.c
 	@echo "Compiling C code"
 	@$(CC) $(CFLAGS) -I$(CINCDIR) -o $@ $^

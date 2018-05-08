@@ -1,34 +1,40 @@
 
-obj/c/kernel.o:     file format elf32-littlearm
+obj/c/mailbox.o:     file format elf32-littlearm
 
 
 Disassembly of section .text:
 
-00000000 <kernel_main>:
-   0:	e92d4010 	push	{r4, lr}
-   4:	e3a01401 	mov	r1, #16777216	; 0x1000000
-   8:	e3a00004 	mov	r0, #4
-   c:	e3430f20 	movt	r0, #16160	; 0x3f20
-  10:	ebfffffe 	bl	0 <PUT32>
-  14:	e3a02020 	mov	r2, #32
-  18:	e3001438 	movw	r1, #1080	; 0x438
-  1c:	e3a00d1e 	mov	r0, #1920	; 0x780
-  20:	ebfffffe 	bl	0 <gfx_init>
-  24:	e3500000 	cmp	r0, #0
-  28:	1a000004 	bne	40 <kernel_main+0x40>
-  2c:	e3a00028 	mov	r0, #40	; 0x28
-  30:	e3430f20 	movt	r0, #16160	; 0x3f20
-  34:	e3a01701 	mov	r1, #262144	; 0x40000
-  38:	e8bd4010 	pop	{r4, lr}
-  3c:	eafffffe 	b	0 <PUT32>
-  40:	e3a0001c 	mov	r0, #28
-  44:	e3430f20 	movt	r0, #16160	; 0x3f20
-  48:	e3a01701 	mov	r1, #262144	; 0x40000
-  4c:	ebfffffe 	bl	0 <PUT32>
-  50:	e3a00000 	mov	r0, #0
-  54:	e34f0fff 	movt	r0, #65535	; 0xffff
-  58:	e8bd4010 	pop	{r4, lr}
-  5c:	eafffffe 	b	0 <gfx_clear_screen>
+00000000 <mbox_call>:
+   0:	e3a0ca0b 	mov	ip, #45056	; 0xb000
+   4:	e343cf00 	movt	ip, #16128	; 0x3f00
+   8:	e92d4010 	push	{r4, lr}
+   c:	e320f000 	nop	{0}
+  10:	e59c38e0 	ldr	r3, [ip, #2272]	; 0x8e0
+  14:	e3530000 	cmp	r3, #0
+  18:	bafffffb 	blt	c <mbox_call+0xc>
+  1c:	e3c0300f 	bic	r3, r0, #15
+  20:	e201400f 	and	r4, r1, #15
+  24:	e3a02a0b 	mov	r2, #45056	; 0xb000
+  28:	e3432f00 	movt	r2, #16128	; 0x3f00
+  2c:	e1a0e003 	mov	lr, r3
+  30:	e18e3004 	orr	r3, lr, r4
+  34:	e58c3900 	str	r3, [ip, #2304]	; 0x900
+  38:	e320f000 	nop	{0}
+  3c:	e59238e0 	ldr	r3, [r2, #2272]	; 0x8e0
+  40:	e3130101 	tst	r3, #1073741824	; 0x40000000
+  44:	1afffffb 	bne	38 <mbox_call+0x38>
+  48:	e5923880 	ldr	r3, [r2, #2176]	; 0x880
+  4c:	e203c00f 	and	ip, r3, #15
+  50:	e15c0001 	cmp	ip, r1
+  54:	1afffff7 	bne	38 <mbox_call+0x38>
+  58:	e3c3300f 	bic	r3, r3, #15
+  5c:	e1500003 	cmp	r0, r3
+  60:	1afffff4 	bne	38 <mbox_call+0x38>
+  64:	e5900004 	ldr	r0, [r0, #4]
+  68:	e2400102 	sub	r0, r0, #-2147483648	; 0x80000000
+  6c:	e16f0f10 	clz	r0, r0
+  70:	e1a002a0 	lsr	r0, r0, #5
+  74:	e8bd8010 	pop	{r4, pc}
 
 Disassembly of section .comment:
 
@@ -54,7 +60,7 @@ Disassembly of section .comment:
   48:	34303930 	ldrtcc	r3, [r0], #-2352	; 0xfffff6d0
   4c:	65722820 	ldrbvs	r2, [r2, #-2080]!	; 0xfffff7e0
   50:	7361656c 	cmnvc	r1, #108, 10	; 0x1b000000
-  54:	5b202965 	blpl	80a5f0 <kernel_main+0x80a5f0>
+  54:	5b202965 	blpl	80a5f0 <mbox_call+0x80a5f0>
   58:	2f4d5241 	svccs	0x004d5241
   5c:	65626d65 	strbvs	r6, [r2, #-3429]!	; 0xfffff29b
   60:	64656464 	strbtvs	r6, [r5], #-1124	; 0xfffffb9c

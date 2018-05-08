@@ -1,9 +1,9 @@
-#ifndef _RASPIREG_H_
-#define _RASPIREG_H_
+#ifndef _REG_H_
+#define _REG_H_
 
-#define PERI_BASE		0x3F000000
+#define MMIO_BASE		0x3F000000
 
-#define GPIO_BASE		(PERI_BASE + 0x200000)
+#define GPIO_BASE		(MMIO_BASE + 0x200000)
 #define GPFSEL0         (GPIO_BASE + 0x00)
 #define GPFSEL1         (GPIO_BASE + 0x04)
 #define GPFSEL2         (GPIO_BASE + 0x08)
@@ -33,7 +33,7 @@
 #define GPPUD           (GPIO_BASE + 0x94)
 #define GPPUDCLK0       (GPIO_BASE + 0x98)
 #define GPPUDCLK1       (GPIO_BASE + 0x9C)
-#define UART0_BASE      (PERI_BASE + 0x201000)
+#define UART0_BASE      (MMIO_BASE + 0x201000)
 #define UART0_DR        (UART0_BASE + 0x00)
 #define UART0_RSRECR    (UART0_BASE + 0x04)
 #define UART0_FR        (UART0_BASE + 0x18)
@@ -52,8 +52,5 @@
 #define UART0_ITIP      (UART0_BASE + 0x84)
 #define UART0_ITOP      (UART0_BASE + 0x88)
 #define UART0_TDR       (UART0_BASE + 0x8C)
-#define MAIL_BASE		(PERI_BASE + 0xB880)
-
-#define REG(r)			*((volatile uint32_t *) r)
 
 #endif
